@@ -9,19 +9,17 @@ export const App = () => {
   const defaultTab = data.sort((a, b) => a.order - b.order)[0].id;
   return (
     <>
-      <div>
-        <AllTabs />
-        <Suspense fallback={'Loading...'}>
-          <Routes>
-            <Route path='/' element={<Navigate to={`/${defaultTab}`} />} />
-            {data.map((route) => {
-              const RenderComponent = lazy(() => import(`./components/${route.path}`));
-              return <Route key={route.id} path={`/${route.id}`} element={<RenderComponent />} />;
-            })}
-            <Route path='*' element={<ErrorComponent />} />
-          </Routes>
-        </Suspense>
-      </div>
+      <AllTabs />
+      <Suspense fallback={'Loading...'}>
+        <Routes>
+          <Route path='/' element={<Navigate to={`/${defaultTab}`} />} />
+          {data.map((route) => {
+            const RenderComponent = lazy(() => import(`./components/${route.path}`));
+            return <Route key={route.id} path={`/${route.id}`} element={<RenderComponent />} />;
+          })}
+          <Route path='*' element={<ErrorComponent />} />
+        </Routes>
+      </Suspense>
     </>
   );
 };
