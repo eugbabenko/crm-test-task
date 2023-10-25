@@ -1,24 +1,25 @@
-import { Suspense } from 'react';
-import { Route, Routes, HashRouter } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
+import { lazy, Suspense } from 'react';
 
-import { TableLazy, ChartLazy, ListLazy } from './routes/index.js';
-
+import ErrorComponent from './pages/Error.jsx';
 import AllTabs from './components/AllTabs.jsx';
-import ErrorComponent from './components/404.jsx';
+import data from './data/tabs.json';
 
 export const App = () => {
+  const defaultTab = data.sort((a, b) => a.order - b.order)[0].id;
   return (
     <>
       <div>
+        <AllTabs />
         <Suspense fallback={'Loading...'}>
-          <HashRouter>
-            <Routes>
-              <Route path={'/dummyChart'} element={<ChartLazy />} />
-              <Route path={'/dummyList'} element={<ListLazy />} />
-              <Route path={'/dummyTable'} element={<TableLazy />} />
-              <Route path={'*'} element={<ErrorComponent />} />
-            </Routes>
-          </HashRouter>
+          <Routes>
+            <Route path='/' element={<Navigate to={`/${defaultTab}`} />} />
+            {data.map((route) => {
+              const RenderComponent = lazy(() => import(`./components/${route.path}`));
+              return <Route key={route.id} path={`/${route.id}`} element={<RenderComponent />} />;
+            })}
+            <Route path='*' element={<ErrorComponent />} />
+          </Routes>
         </Suspense>
       </div>
     </>
