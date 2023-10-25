@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktest_crm_system=self.webpackChunktest_crm_system||[]).push([[498],{498:(s,t,e)=>{e.r(t),e.d(t,{default:()=>c}),e(294);var r=e(893);const c=function(){return(0,r.jsx)("div",{children:"Chart"})}}}]);

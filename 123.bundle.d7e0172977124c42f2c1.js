@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunktest_crm_system=self.webpackChunktest_crm_system||[]).push([[123],{123:(e,s,t)=>{t.r(s),t.d(s,{default:()=>c}),t(294);var r=t(893);const c=function(){return(0,r.jsx)("table",{children:(0,r.jsxs)("tr",{children:[(0,r.jsx)("td",{children:"Dummy"}),(0,r.jsx)("td",{children:"Table"})]})})}}}]);
